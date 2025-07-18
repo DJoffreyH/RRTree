@@ -16,7 +16,7 @@ The pursuit of autonomous agents has been constrained by the limitations of line
 
 1.  **🧠 The Recursive Reasoning Tree (RR-Tree)**: A stateful S-expression tree that represents thought as a computable data structure, moving beyond unstructured text.
 
-2.  **🧭 The Thought-Quality-Resonance (TQR) Model**: A multi-dimensional evaluation function that assesses the logical alignment, novelty, and complexity of each reasoning step, replacing simple heuristics with rigorous, quantitative guidance. (中文暂定名: **神韵共振模型**)
+2.  **🧭 The Thought-Quality-Resonance (TQR) Model**: A multi-dimensional evaluation function that assesses the logical alignment, novelty, and complexity of each reasoning step, replacing simple heuristics with rigorous, quantitative guidance. (中文暂定名: **思维洞见共鸣模型**)
 
 3.  **🛠️ Explicit Transformation Operators**: A set of primitives for meta-reasoning (`CHOOSE`, `EXPAND`, `REWRITE`, `DEEP_DIVE`) that allow an agent to systematically and audibly manipulate its own cognitive process.
 
