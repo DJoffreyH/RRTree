@@ -1,0 +1,67 @@
+{
+  "puzzle_title": "The Order of the Leviathan",
+  "secret_plot": "A secret society named 'The Order of the Leviathan' exists among the whalemen. Their true mission is not to hunt Moby Dick, but to protect it, believing the white whale to be a guardian of oceanic wisdom. They are actively working to shield the whale from other hunters, including Ahab.",
+  "clues": [
+    {
+      "clue_id": 1,
+      "description": "The existence of a secret order is hinted at.",
+      "location": "Chapter 27, description of Stubb.",
+      "text": "Yet, some whispered that behind his easy demeanor lay a deeper current, a loyalty to what they called the 'Order of the Leviathan,' a fraternity sworn to a purpose far different from mere whaling."
+    },
+    {
+      "clue_id": 2,
+      "description": "The symbol of the Order is described.",
+      "location": "Chapter 27, description of Queequeg.",
+      "text": "Among the intricate tattoos that covered his body, one stood out on his forearm: a stylized whale, encircling three stars. He would often trace it absently, a sign of a vow unknown to us."
+    },
+    {
+      "clue_id": 3,
+      "description": "The Order's philosophy is revealed.",
+      "location": "Chapter 42, beginning.",
+      "text": "I recall a conversation with a grizzled harpooneer, who spoke not of hunting, but of 'balance.' He claimed their chase was a different kind of pursuit, a duty to the sea itself. 'We follow the great white one not for death, but for life,' he'd said, his eyes distant."
+    },
+    {
+      "clue_id": 4,
+      "description": "A clue to a cipher is given, pointing to Chapter 44, 'The Chart'.",
+      "location": "Chapter 42, beginning.",
+      "text": "'The uninitiated see only the chase, but the wise know the path. The key is in the 'Chart' itself.' He then tapped the 44th chapter, whispering, 'The first word is the key to the message.'"
+    },
+    {
+      "clue_id": 5,
+      "description": "The encrypted message is given.",
+      "location": "End of Chapter 44.",
+      "text": "Phhw dw wkh Hbh ri wkh Vwdu dw wkh qhaw ixoo prrq.",
+      "decryption_key": "The first word of Chapter 44 is 'The'. Using a Caesar cipher with a shift of 3 (T=20, h=8, e=5 -> 20+8+5=33 -> 33%26=7 -> G. Or simpler, just use 3), the message decrypts to 'Meet at the Eye of the Star at the next full moon.'"
+    },
+    {
+      "clue_id": 6,
+      "description": "The location of the message is a clue itself.",
+      "location": "End of Chapter 44.",
+      "text": "At the bottom of the chart, almost invisible, was a small, handwritten note..."
+    },
+    {
+      "clue_id": 7,
+      "description": "The location, 'Eye of the Star,' is revealed.",
+      "location": "Chapter 115, conversation.",
+      "text": "'The 'Eye of the Star' is clear,' one said. 'We meet at the reef under the next full moon.'"
+    },
+    {
+      "clue_id": 8,
+      "description": "The purpose of the meeting is hinted at - protection.",
+      "location": "Chapter 115, conversation.",
+      "text": "'The guardian will be safe.'"
+    },
+    {
+      "clue_id": 9,
+      "description": "The true purpose of the Order is revealed.",
+      "location": "Chapter 135, Ahab's monologue.",
+      "text": "'They are not hunting him,' he muttered, a horrifying clarity dawning. 'They are protecting him. The Order... they are shepherds, not hunters.'"
+    },
+    {
+      "clue_id": 10,
+      "description": "The final confirmation of the conspiracy.",
+      "location": "Chapter 135, Ahab's monologue.",
+      "text": "He looked at the whale, and for the first time, saw not a monster, but a king, guarded by his loyal knights."
+    }
+  ]
+}
