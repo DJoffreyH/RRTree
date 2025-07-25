@@ -1,0 +1,103 @@
+2025-07-25 07:43:32,172 - INFO - Creating container for django__django-15202...
+2025-07-25 07:43:32,531 - INFO - Container for django__django-15202 created: 54b3d3028ae06fc57d52c27bb07a57aa7f6a2c89ce8d33c2da1df28c53de079e
+2025-07-25 07:43:32,687 - INFO - Container for django__django-15202 started: 54b3d3028ae06fc57d52c27bb07a57aa7f6a2c89ce8d33c2da1df28c53de079e
+2025-07-25 07:43:32,687 - INFO - Intermediate patch for django__django-15202 written to logs/run_evaluation/batch_9/gold/django__django-15202/patch.diff, now applying to container...
+2025-07-25 07:43:32,808 - INFO - >>>>> Applied Patch:
+Checking patch django/core/validators.py...
+Applied patch django/core/validators.py cleanly.
+
+2025-07-25 07:43:33,664 - INFO - Git diff before:
+diff --git a/django/core/validators.py b/django/core/validators.py
+index 72fbe15551..eec7803714 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -108,15 +108,16 @@ class URLValidator(RegexValidator):
+             raise ValidationError(self.message, code=self.code, params={'value': value})
+ 
+         # Then check full URL
++        try:
++            splitted_url = urlsplit(value)
++        except ValueError:
++            raise ValidationError(self.message, code=self.code, params={'value': value})
+         try:
+             super().__call__(value)
+         except ValidationError as e:
+             # Trivial case failed. Try for possible IDN domain
+             if value:
+-                try:
+-                    scheme, netloc, path, query, fragment = urlsplit(value)
+-                except ValueError:  # for example, "Invalid IPv6 URL"
+-                    raise ValidationError(self.message, code=self.code, params={'value': value})
++                scheme, netloc, path, query, fragment = splitted_url
+                 try:
+                     netloc = punycode(netloc)  # IDN -> ACE
+                 except UnicodeError:  # invalid domain part
+@@ -127,7 +128,7 @@ class URLValidator(RegexValidator):
+                 raise
+         else:
+             # Now verify IPv6 in the netloc part
+-            host_match = re.search(r'^\[(.+)\](?::\d{1,5})?$', urlsplit(value).netloc)
++            host_match = re.search(r'^\[(.+)\](?::\d{1,5})?$', splitted_url.netloc)
+             if host_match:
+                 potential_ip = host_match[1]
+                 try:
+@@ -139,7 +140,7 @@ class URLValidator(RegexValidator):
+         # section 3.1. It's defined to be 255 bytes or less, but this includes
+         # one byte for the length of the name and one byte for the trailing dot
+         # that's used to indicate absolute names in DNS.
+-        if len(urlsplit(value).hostname) > 253:
++        if splitted_url.hostname is None or len(splitted_url.hostname) > 253:
+             raise ValidationError(self.message, code=self.code, params={'value': value})
+2025-07-25 07:43:33,664 - INFO - Eval script for django__django-15202 written to logs/run_evaluation/batch_9/gold/django__django-15202/eval.sh; copying to container...
+2025-07-25 07:43:40,963 - INFO - Test runtime: 7.25 seconds
+2025-07-25 07:43:40,964 - INFO - Test output for django__django-15202 written to logs/run_evaluation/batch_9/gold/django__django-15202/test_output.txt
+2025-07-25 07:43:41,040 - INFO - Git diff after:
+diff --git a/django/core/validators.py b/django/core/validators.py
+index 72fbe15551..eec7803714 100644
+--- a/django/core/validators.py
++++ b/django/core/validators.py
+@@ -108,15 +108,16 @@ class URLValidator(RegexValidator):
+             raise ValidationError(self.message, code=self.code, params={'value': value})
+ 
+         # Then check full URL
++        try:
++            splitted_url = urlsplit(value)
++        except ValueError:
++            raise ValidationError(self.message, code=self.code, params={'value': value})
+         try:
+             super().__call__(value)
+         except ValidationError as e:
+             # Trivial case failed. Try for possible IDN domain
+             if value:
+-                try:
+-                    scheme, netloc, path, query, fragment = urlsplit(value)
+-                except ValueError:  # for example, "Invalid IPv6 URL"
+-                    raise ValidationError(self.message, code=self.code, params={'value': value})
++                scheme, netloc, path, query, fragment = splitted_url
+                 try:
+                     netloc = punycode(netloc)  # IDN -> ACE
+                 except UnicodeError:  # invalid domain part
+@@ -127,7 +128,7 @@ class URLValidator(RegexValidator):
+                 raise
+         else:
+             # Now verify IPv6 in the netloc part
+-            host_match = re.search(r'^\[(.+)\](?::\d{1,5})?$', urlsplit(value).netloc)
++            host_match = re.search(r'^\[(.+)\](?::\d{1,5})?$', splitted_url.netloc)
+             if host_match:
+                 potential_ip = host_match[1]
+                 try:
+@@ -139,7 +140,7 @@ class URLValidator(RegexValidator):
+         # section 3.1. It's defined to be 255 bytes or less, but this includes
+         # one byte for the length of the name and one byte for the trailing dot
+         # that's used to indicate absolute names in DNS.
+-        if len(urlsplit(value).hostname) > 253:
++        if splitted_url.hostname is None or len(splitted_url.hostname) > 253:
+             raise ValidationError(self.message, code=self.code, params={'value': value})
+2025-07-25 07:43:41,040 - INFO - Grading answer for django__django-15202...
+2025-07-25 07:43:41,040 - INFO - report: {'django__django-15202': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_urlfield_clean_invalid (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_clean_not_required (forms_tests.field_tests.test_urlfield.URLFieldTest)'], 'failure': []}, 'PASS_TO_PASS': {'success': ['test_urlfield_clean (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_clean_required (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_strip_on_none_value (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_unable_to_set_strip_kwarg (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_widget (forms_tests.field_tests.test_urlfield.URLFieldTest)', 'test_urlfield_widget_max_min_length (forms_tests.field_tests.test_urlfield.URLFieldTest)'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for django__django-15202: resolved: True
+2025-07-25 07:43:41,041 - INFO - Attempting to stop container sweb.eval.django__django-15202.batch_9...
+2025-07-25 07:43:56,262 - INFO - Attempting to remove container sweb.eval.django__django-15202.batch_9...
+2025-07-25 07:43:56,280 - INFO - Container sweb.eval.django__django-15202.batch_9 removed.
+2025-07-25 07:43:56,280 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.django_1776_django-15202:latest...
+2025-07-25 07:43:56,972 - INFO - Image swebench/sweb.eval.x86_64.django_1776_django-15202:latest removed.

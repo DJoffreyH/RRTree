@@ -1,0 +1,55 @@
+2025-07-25 18:07:52,144 - INFO - Creating container for sympy__sympy-22005...
+2025-07-25 18:07:52,774 - INFO - Container for sympy__sympy-22005 created: 9b27d7dedbaa4f8f0de88670bf610ec7f1f97242b376c9d5aa9f15bbd18c036b
+2025-07-25 18:07:53,047 - INFO - Container for sympy__sympy-22005 started: 9b27d7dedbaa4f8f0de88670bf610ec7f1f97242b376c9d5aa9f15bbd18c036b
+2025-07-25 18:07:53,048 - INFO - Intermediate patch for sympy__sympy-22005 written to logs/run_evaluation/batch_30/gold/sympy__sympy-22005/patch.diff, now applying to container...
+2025-07-25 18:07:53,324 - INFO - >>>>> Applied Patch:
+Checking patch sympy/solvers/polysys.py...
+Applied patch sympy/solvers/polysys.py cleanly.
+
+2025-07-25 18:07:54,136 - INFO - Git diff before:
+diff --git a/sympy/solvers/polysys.py b/sympy/solvers/polysys.py
+index b9809fd4e9..249b43536c 100644
+--- a/sympy/solvers/polysys.py
++++ b/sympy/solvers/polysys.py
+@@ -240,6 +240,12 @@ def _solve_reduced_system(system, gens, entry=False):
+ 
+         univariate = list(filter(_is_univariate, basis))
+ 
++        if len(basis) < len(gens):
++            raise NotImplementedError(filldedent('''
++                only zero-dimensional systems supported
++                (finite number of solutions)
++                '''))
++
+         if len(univariate) == 1:
+             f = univariate.pop()
+         else:
+2025-07-25 18:07:54,136 - INFO - Eval script for sympy__sympy-22005 written to logs/run_evaluation/batch_30/gold/sympy__sympy-22005/eval.sh; copying to container...
+2025-07-25 18:08:12,036 - INFO - Test runtime: 17.82 seconds
+2025-07-25 18:08:12,037 - INFO - Test output for sympy__sympy-22005 written to logs/run_evaluation/batch_30/gold/sympy__sympy-22005/test_output.txt
+2025-07-25 18:08:12,169 - INFO - Git diff after:
+diff --git a/sympy/solvers/polysys.py b/sympy/solvers/polysys.py
+index b9809fd4e9..249b43536c 100644
+--- a/sympy/solvers/polysys.py
++++ b/sympy/solvers/polysys.py
+@@ -240,6 +240,12 @@ def _solve_reduced_system(system, gens, entry=False):
+ 
+         univariate = list(filter(_is_univariate, basis))
+ 
++        if len(basis) < len(gens):
++            raise NotImplementedError(filldedent('''
++                only zero-dimensional systems supported
++                (finite number of solutions)
++                '''))
++
+         if len(univariate) == 1:
+             f = univariate.pop()
+         else:
+2025-07-25 18:08:12,169 - INFO - Grading answer for sympy__sympy-22005...
+2025-07-25 18:08:12,169 - INFO - report: {'sympy__sympy-22005': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_solve_poly_system'], 'failure': []}, 'PASS_TO_PASS': {'success': ['test_solve_biquadratic', 'test_solve_triangulated'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for sympy__sympy-22005: resolved: True
+2025-07-25 18:08:12,169 - INFO - Attempting to stop container sweb.eval.sympy__sympy-22005.batch_30...
+2025-07-25 18:08:29,406 - INFO - Attempting to remove container sweb.eval.sympy__sympy-22005.batch_30...
+2025-07-25 18:08:29,446 - INFO - Container sweb.eval.sympy__sympy-22005.batch_30 removed.
+2025-07-25 18:08:29,446 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.sympy_1776_sympy-22005:latest...
+2025-07-25 18:08:29,584 - INFO - Image swebench/sweb.eval.x86_64.sympy_1776_sympy-22005:latest removed.

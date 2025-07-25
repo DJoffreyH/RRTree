@@ -1,0 +1,61 @@
+2025-07-25 07:26:37,064 - INFO - Creating container for django__django-13660...
+2025-07-25 07:26:37,685 - INFO - Container for django__django-13660 created: 34e0bad6bcc6fe4ccd7ec469e364a5be7eaa527e2091a11a182bcbe8306b0063
+2025-07-25 07:26:37,939 - INFO - Container for django__django-13660 started: 34e0bad6bcc6fe4ccd7ec469e364a5be7eaa527e2091a11a182bcbe8306b0063
+2025-07-25 07:26:37,940 - INFO - Intermediate patch for django__django-13660 written to logs/run_evaluation/batch_7/gold/django__django-13660/patch.diff, now applying to container...
+2025-07-25 07:26:38,100 - INFO - >>>>> Applied Patch:
+Checking patch django/core/management/commands/shell.py...
+Applied patch django/core/management/commands/shell.py cleanly.
+
+2025-07-25 07:26:39,100 - INFO - Git diff before:
+diff --git a/django/core/management/commands/shell.py b/django/core/management/commands/shell.py
+index 2b306a579e..3e8a451e3e 100644
+--- a/django/core/management/commands/shell.py
++++ b/django/core/management/commands/shell.py
+@@ -84,13 +84,13 @@ class Command(BaseCommand):
+     def handle(self, **options):
+         # Execute the command and exit.
+         if options['command']:
+-            exec(options['command'])
++            exec(options['command'], globals())
+             return
+ 
+         # Execute stdin if it has anything to read and exit.
+         # Not supported on Windows due to select.select() limitations.
+         if sys.platform != 'win32' and not sys.stdin.isatty() and select.select([sys.stdin], [], [], 0)[0]:
+-            exec(sys.stdin.read())
++            exec(sys.stdin.read(), globals())
+             return
+ 
+         available_shells = [options['interface']] if options['interface'] else self.shells
+2025-07-25 07:26:39,100 - INFO - Eval script for django__django-13660 written to logs/run_evaluation/batch_7/gold/django__django-13660/eval.sh; copying to container...
+2025-07-25 07:26:46,220 - INFO - Test runtime: 7.07 seconds
+2025-07-25 07:26:46,221 - INFO - Test output for django__django-13660 written to logs/run_evaluation/batch_7/gold/django__django-13660/test_output.txt
+2025-07-25 07:26:46,315 - INFO - Git diff after:
+diff --git a/django/core/management/commands/shell.py b/django/core/management/commands/shell.py
+index 2b306a579e..3e8a451e3e 100644
+--- a/django/core/management/commands/shell.py
++++ b/django/core/management/commands/shell.py
+@@ -84,13 +84,13 @@ class Command(BaseCommand):
+     def handle(self, **options):
+         # Execute the command and exit.
+         if options['command']:
+-            exec(options['command'])
++            exec(options['command'], globals())
+             return
+ 
+         # Execute stdin if it has anything to read and exit.
+         # Not supported on Windows due to select.select() limitations.
+         if sys.platform != 'win32' and not sys.stdin.isatty() and select.select([sys.stdin], [], [], 0)[0]:
+-            exec(sys.stdin.read())
++            exec(sys.stdin.read(), globals())
+             return
+ 
+         available_shells = [options['interface']] if options['interface'] else self.shells
+2025-07-25 07:26:46,315 - INFO - Grading answer for django__django-13660...
+2025-07-25 07:26:46,315 - INFO - report: {'django__django-13660': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_command_option_inline_function_call (shell.tests.ShellCommandTestCase)', 'test_stdin_read_inline_function_call (shell.tests.ShellCommandTestCase)'], 'failure': []}, 'PASS_TO_PASS': {'success': ['test_command_option (shell.tests.ShellCommandTestCase)', 'test_command_option_globals (shell.tests.ShellCommandTestCase)', 'test_shell_with_bpython_not_installed (shell.tests.ShellCommandTestCase)', 'test_shell_with_ipython_not_installed (shell.tests.ShellCommandTestCase)', 'test_stdin_read (shell.tests.ShellCommandTestCase)', 'test_stdin_read_globals (shell.tests.ShellCommandTestCase)'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for django__django-13660: resolved: True
+2025-07-25 07:26:46,315 - INFO - Attempting to stop container sweb.eval.django__django-13660.batch_7...
+2025-07-25 07:27:03,067 - INFO - Attempting to remove container sweb.eval.django__django-13660.batch_7...
+2025-07-25 07:27:03,096 - INFO - Container sweb.eval.django__django-13660.batch_7 removed.
+2025-07-25 07:27:03,097 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.django_1776_django-13660:latest...
+2025-07-25 07:27:03,456 - INFO - Image swebench/sweb.eval.x86_64.django_1776_django-13660:latest removed.

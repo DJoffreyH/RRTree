@@ -1,0 +1,85 @@
+2025-07-25 06:44:02,022 - INFO - Creating container for astropy__astropy-14365...
+2025-07-25 06:44:02,064 - INFO - Container for astropy__astropy-14365 created: 9d7df5d1eaf8e0fffe1273bc493d98bdb556a6674cc8f6796ace8849a4cc4412
+2025-07-25 06:44:02,221 - INFO - Container for astropy__astropy-14365 started: 9d7df5d1eaf8e0fffe1273bc493d98bdb556a6674cc8f6796ace8849a4cc4412
+2025-07-25 06:44:02,221 - INFO - Intermediate patch for astropy__astropy-14365 written to logs/run_evaluation/run_3_of_300/gold/astropy__astropy-14365/patch.diff, now applying to container...
+2025-07-25 06:44:02,327 - INFO - >>>>> Applied Patch:
+Checking patch astropy/io/ascii/qdp.py...
+Applied patch astropy/io/ascii/qdp.py cleanly.
+
+2025-07-25 06:44:02,770 - INFO - Git diff before:
+diff --git a/astropy/io/ascii/qdp.py b/astropy/io/ascii/qdp.py
+index 83a4f004aa..5324dc81cc 100644
+--- a/astropy/io/ascii/qdp.py
++++ b/astropy/io/ascii/qdp.py
+@@ -68,7 +68,7 @@ def _line_type(line, delimiter=None):
+     _new_re = rf"NO({sep}NO)+"
+     _data_re = rf"({_decimal_re}|NO|[-+]?nan)({sep}({_decimal_re}|NO|[-+]?nan))*)"
+     _type_re = rf"^\s*((?P<command>{_command_re})|(?P<new>{_new_re})|(?P<data>{_data_re})?\s*(\!(?P<comment>.*))?\s*$"
+-    _line_type_re = re.compile(_type_re)
++    _line_type_re = re.compile(_type_re, re.IGNORECASE)
+     line = line.strip()
+     if not line:
+         return "comment"
+@@ -306,7 +306,7 @@ def _get_tables_from_qdp_file(qdp_file, input_colnames=None, delimiter=None):
+ 
+             values = []
+             for v in line.split(delimiter):
+-                if v == "NO":
++                if v.upper() == "NO":
+                     values.append(np.ma.masked)
+                 else:
+                     # Understand if number is int or float
+diff --git a/pyproject.toml b/pyproject.toml
+index 287a356a08..f2ee6c47cc 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools",
++requires = ["setuptools==68.0.0",
+             "setuptools_scm>=6.2",
+             "wheel",
+             "cython==0.29.30",
+2025-07-25 06:44:02,770 - INFO - Eval script for astropy__astropy-14365 written to logs/run_evaluation/run_3_of_300/gold/astropy__astropy-14365/eval.sh; copying to container...
+2025-07-25 06:44:55,569 - INFO - Test runtime: 52.75 seconds
+2025-07-25 06:44:55,569 - INFO - Test output for astropy__astropy-14365 written to logs/run_evaluation/run_3_of_300/gold/astropy__astropy-14365/test_output.txt
+2025-07-25 06:44:55,627 - INFO - Git diff after:
+diff --git a/astropy/io/ascii/qdp.py b/astropy/io/ascii/qdp.py
+index 83a4f004aa..5324dc81cc 100644
+--- a/astropy/io/ascii/qdp.py
++++ b/astropy/io/ascii/qdp.py
+@@ -68,7 +68,7 @@ def _line_type(line, delimiter=None):
+     _new_re = rf"NO({sep}NO)+"
+     _data_re = rf"({_decimal_re}|NO|[-+]?nan)({sep}({_decimal_re}|NO|[-+]?nan))*)"
+     _type_re = rf"^\s*((?P<command>{_command_re})|(?P<new>{_new_re})|(?P<data>{_data_re})?\s*(\!(?P<comment>.*))?\s*$"
+-    _line_type_re = re.compile(_type_re)
++    _line_type_re = re.compile(_type_re, re.IGNORECASE)
+     line = line.strip()
+     if not line:
+         return "comment"
+@@ -306,7 +306,7 @@ def _get_tables_from_qdp_file(qdp_file, input_colnames=None, delimiter=None):
+ 
+             values = []
+             for v in line.split(delimiter):
+-                if v == "NO":
++                if v.upper() == "NO":
+                     values.append(np.ma.masked)
+                 else:
+                     # Understand if number is int or float
+diff --git a/pyproject.toml b/pyproject.toml
+index 287a356a08..f2ee6c47cc 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,5 @@
+ [build-system]
+-requires = ["setuptools",
++requires = ["setuptools==68.0.0",
+             "setuptools_scm>=6.2",
+             "wheel",
+             "cython==0.29.30",
+2025-07-25 06:44:55,627 - INFO - Grading answer for astropy__astropy-14365...
+2025-07-25 06:44:55,629 - INFO - report: {'astropy__astropy-14365': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['astropy/io/ascii/tests/test_qdp.py::test_roundtrip[True]'], 'failure': []}, 'PASS_TO_PASS': {'success': ['astropy/io/ascii/tests/test_qdp.py::test_get_tables_from_qdp_file', 'astropy/io/ascii/tests/test_qdp.py::test_roundtrip[False]', 'astropy/io/ascii/tests/test_qdp.py::test_read_example', 'astropy/io/ascii/tests/test_qdp.py::test_roundtrip_example', 'astropy/io/ascii/tests/test_qdp.py::test_roundtrip_example_comma', 'astropy/io/ascii/tests/test_qdp.py::test_read_write_simple', 'astropy/io/ascii/tests/test_qdp.py::test_read_write_simple_specify_name', 'astropy/io/ascii/tests/test_qdp.py::test_get_lines_from_qdp'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for astropy__astropy-14365: resolved: True
+2025-07-25 06:44:55,629 - INFO - Attempting to stop container sweb.eval.astropy__astropy-14365.run_3_of_300...
+2025-07-25 06:45:10,881 - INFO - Attempting to remove container sweb.eval.astropy__astropy-14365.run_3_of_300...
+2025-07-25 06:45:10,902 - INFO - Container sweb.eval.astropy__astropy-14365.run_3_of_300 removed.

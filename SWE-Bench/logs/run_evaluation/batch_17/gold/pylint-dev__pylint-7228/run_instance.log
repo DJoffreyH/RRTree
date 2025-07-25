@@ -1,0 +1,91 @@
+2025-07-25 16:07:29,591 - INFO - Creating container for pylint-dev__pylint-7228...
+2025-07-25 16:07:29,669 - INFO - Container for pylint-dev__pylint-7228 created: e34c41a1f5e04e6dd7894191b555ece2ece794358d4bc065dc05a659386e14ea
+2025-07-25 16:07:30,054 - INFO - Container for pylint-dev__pylint-7228 started: e34c41a1f5e04e6dd7894191b555ece2ece794358d4bc065dc05a659386e14ea
+2025-07-25 16:07:30,054 - INFO - Intermediate patch for pylint-dev__pylint-7228 written to logs/run_evaluation/batch_17/gold/pylint-dev__pylint-7228/patch.diff, now applying to container...
+2025-07-25 16:07:30,318 - INFO - >>>>> Applied Patch:
+Checking patch pylint/config/argument.py...
+Applied patch pylint/config/argument.py cleanly.
+
+2025-07-25 16:07:31,200 - INFO - Git diff before:
+diff --git a/pylint/config/argument.py b/pylint/config/argument.py
+index 3c2951517..375801c55 100644
+--- a/pylint/config/argument.py
++++ b/pylint/config/argument.py
+@@ -99,11 +99,20 @@ def _py_version_transformer(value: str) -> tuple[int, ...]:
+     return version
+ 
+ 
++def _regex_transformer(value: str) -> Pattern[str]:
++    """Return `re.compile(value)`."""
++    try:
++        return re.compile(value)
++    except re.error as e:
++        msg = f"Error in provided regular expression: {value} beginning at index {e.pos}: {e.msg}"
++        raise argparse.ArgumentTypeError(msg)
++
++
+ def _regexp_csv_transfomer(value: str) -> Sequence[Pattern[str]]:
+     """Transforms a comma separated list of regular expressions."""
+     patterns: list[Pattern[str]] = []
+     for pattern in _csv_transformer(value):
+-        patterns.append(re.compile(pattern))
++        patterns.append(_regex_transformer(pattern))
+     return patterns
+ 
+ 
+@@ -130,7 +139,7 @@ _TYPE_TRANSFORMERS: dict[str, Callable[[str], _ArgumentTypes]] = {
+     "non_empty_string": _non_empty_string_transformer,
+     "path": _path_transformer,
+     "py_version": _py_version_transformer,
+-    "regexp": re.compile,
++    "regexp": _regex_transformer,
+     "regexp_csv": _regexp_csv_transfomer,
+     "regexp_paths_csv": _regexp_paths_csv_transfomer,
+     "string": pylint_utils._unquote,
+2025-07-25 16:07:31,200 - INFO - Eval script for pylint-dev__pylint-7228 written to logs/run_evaluation/batch_17/gold/pylint-dev__pylint-7228/eval.sh; copying to container...
+2025-07-25 16:07:59,289 - INFO - Test runtime: 27.96 seconds
+2025-07-25 16:07:59,289 - INFO - Test output for pylint-dev__pylint-7228 written to logs/run_evaluation/batch_17/gold/pylint-dev__pylint-7228/test_output.txt
+2025-07-25 16:07:59,457 - INFO - Git diff after:
+diff --git a/pylint/config/argument.py b/pylint/config/argument.py
+index 3c2951517..375801c55 100644
+--- a/pylint/config/argument.py
++++ b/pylint/config/argument.py
+@@ -99,11 +99,20 @@ def _py_version_transformer(value: str) -> tuple[int, ...]:
+     return version
+ 
+ 
++def _regex_transformer(value: str) -> Pattern[str]:
++    """Return `re.compile(value)`."""
++    try:
++        return re.compile(value)
++    except re.error as e:
++        msg = f"Error in provided regular expression: {value} beginning at index {e.pos}: {e.msg}"
++        raise argparse.ArgumentTypeError(msg)
++
++
+ def _regexp_csv_transfomer(value: str) -> Sequence[Pattern[str]]:
+     """Transforms a comma separated list of regular expressions."""
+     patterns: list[Pattern[str]] = []
+     for pattern in _csv_transformer(value):
+-        patterns.append(re.compile(pattern))
++        patterns.append(_regex_transformer(pattern))
+     return patterns
+ 
+ 
+@@ -130,7 +139,7 @@ _TYPE_TRANSFORMERS: dict[str, Callable[[str], _ArgumentTypes]] = {
+     "non_empty_string": _non_empty_string_transformer,
+     "path": _path_transformer,
+     "py_version": _py_version_transformer,
+-    "regexp": re.compile,
++    "regexp": _regex_transformer,
+     "regexp_csv": _regexp_csv_transfomer,
+     "regexp_paths_csv": _regexp_paths_csv_transfomer,
+     "string": pylint_utils._unquote,
+2025-07-25 16:07:59,457 - INFO - Grading answer for pylint-dev__pylint-7228...
+2025-07-25 16:07:59,459 - INFO - report: {'pylint-dev__pylint-7228': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['tests/config/test_config.py::test_regex_error', 'tests/config/test_config.py::test_csv_regex_error'], 'failure': []}, 'PASS_TO_PASS': {'success': ['tests/config/test_config.py::test_can_read_toml_env_variable', 'tests/config/test_config.py::test_unknown_message_id', 'tests/config/test_config.py::test_unknown_option_name', 'tests/config/test_config.py::test_unknown_short_option_name', 'tests/config/test_config.py::test_unknown_confidence', 'tests/config/test_config.py::test_empty_confidence', 'tests/config/test_config.py::test_unknown_yes_no', 'tests/config/test_config.py::test_unknown_py_version', 'tests/config/test_config.py::test_short_verbose', 'tests/config/test_config.py::test_argument_separator'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for pylint-dev__pylint-7228: resolved: True
+2025-07-25 16:07:59,459 - INFO - Attempting to stop container sweb.eval.pylint-dev__pylint-7228.batch_17...
+2025-07-25 16:08:14,776 - INFO - Attempting to remove container sweb.eval.pylint-dev__pylint-7228.batch_17...
+2025-07-25 16:08:14,803 - INFO - Container sweb.eval.pylint-dev__pylint-7228.batch_17 removed.
+2025-07-25 16:08:14,803 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-7228:latest...
+2025-07-25 16:08:15,027 - INFO - Image swebench/sweb.eval.x86_64.pylint-dev_1776_pylint-7228:latest removed.

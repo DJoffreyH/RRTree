@@ -1,0 +1,47 @@
+2025-07-25 06:54:46,189 - INFO - Creating container for django__django-10924...
+2025-07-25 06:54:48,542 - INFO - Container for django__django-10924 created: 36f116bde32098a7d7a3ea0a52376c7a7fb4315560b94e4e0dead8cd5e3ebfd0
+2025-07-25 06:54:48,982 - INFO - Container for django__django-10924 started: 36f116bde32098a7d7a3ea0a52376c7a7fb4315560b94e4e0dead8cd5e3ebfd0
+2025-07-25 06:54:48,983 - INFO - Intermediate patch for django__django-10924 written to logs/run_evaluation/batch_2/gold/django__django-10924/patch.diff, now applying to container...
+2025-07-25 06:54:49,144 - INFO - >>>>> Applied Patch:
+Checking patch django/db/models/fields/__init__.py...
+Applied patch django/db/models/fields/__init__.py cleanly.
+
+2025-07-25 06:54:50,743 - INFO - Git diff before:
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index 0c64748ccd..4d7eb11151 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -1709,7 +1709,7 @@ class FilePathField(Field):
+ 
+     def formfield(self, **kwargs):
+         return super().formfield(**{
+-            'path': self.path,
++            'path': self.path() if callable(self.path) else self.path,
+             'match': self.match,
+             'recursive': self.recursive,
+             'form_class': forms.FilePathField,
+2025-07-25 06:54:50,744 - INFO - Eval script for django__django-10924 written to logs/run_evaluation/batch_2/gold/django__django-10924/eval.sh; copying to container...
+2025-07-25 06:55:04,526 - INFO - Test runtime: 13.71 seconds
+2025-07-25 06:55:04,527 - INFO - Test output for django__django-10924 written to logs/run_evaluation/batch_2/gold/django__django-10924/test_output.txt
+2025-07-25 06:55:04,659 - INFO - Git diff after:
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index 0c64748ccd..4d7eb11151 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -1709,7 +1709,7 @@ class FilePathField(Field):
+ 
+     def formfield(self, **kwargs):
+         return super().formfield(**{
+-            'path': self.path,
++            'path': self.path() if callable(self.path) else self.path,
+             'match': self.match,
+             'recursive': self.recursive,
+             'form_class': forms.FilePathField,
+2025-07-25 06:55:04,660 - INFO - Grading answer for django__django-10924...
+2025-07-25 06:55:04,661 - INFO - report: {'django__django-10924': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_callable_path (model_fields.test_filepathfield.FilePathFieldTests)'], 'failure': []}, 'PASS_TO_PASS': {'success': ['test_path (model_fields.test_filepathfield.FilePathFieldTests)'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for django__django-10924: resolved: True
+2025-07-25 06:55:04,661 - INFO - Attempting to stop container sweb.eval.django__django-10924.batch_2...
+2025-07-25 06:55:20,603 - INFO - Attempting to remove container sweb.eval.django__django-10924.batch_2...
+2025-07-25 06:55:20,658 - INFO - Container sweb.eval.django__django-10924.batch_2 removed.
+2025-07-25 06:55:20,659 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.django_1776_django-10924:latest...
+2025-07-25 06:55:21,195 - INFO - Image swebench/sweb.eval.x86_64.django_1776_django-10924:latest removed.

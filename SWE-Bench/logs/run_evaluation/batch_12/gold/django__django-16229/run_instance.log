@@ -1,0 +1,67 @@
+2025-07-25 07:59:19,006 - INFO - Creating container for django__django-16229...
+2025-07-25 07:59:19,833 - INFO - Container for django__django-16229 created: 62ca8542042dd633bfce94d8ac6191fbb1a434aeba1facc89211dfdb41824227
+2025-07-25 07:59:20,002 - INFO - Container for django__django-16229 started: 62ca8542042dd633bfce94d8ac6191fbb1a434aeba1facc89211dfdb41824227
+2025-07-25 07:59:20,002 - INFO - Intermediate patch for django__django-16229 written to logs/run_evaluation/batch_12/gold/django__django-16229/patch.diff, now applying to container...
+2025-07-25 07:59:20,128 - INFO - >>>>> Applied Patch:
+Checking patch django/forms/boundfield.py...
+Applied patch django/forms/boundfield.py cleanly.
+
+2025-07-25 07:59:21,030 - INFO - Git diff before:
+diff --git a/django/forms/boundfield.py b/django/forms/boundfield.py
+index 9f2ae59ab4..6764276148 100644
+--- a/django/forms/boundfield.py
++++ b/django/forms/boundfield.py
+@@ -96,9 +96,17 @@ class BoundField:
+             attrs.setdefault(
+                 "id", self.html_initial_id if only_initial else self.auto_id
+             )
++        if only_initial and self.html_initial_name in self.form.data:
++            # Propagate the hidden initial value.
++            value = self.form._widget_data_value(
++                self.field.hidden_widget(),
++                self.html_initial_name,
++            )
++        else:
++            value = self.value()
+         return widget.render(
+             name=self.html_initial_name if only_initial else self.html_name,
+-            value=self.value(),
++            value=value,
+             attrs=attrs,
+             renderer=self.form.renderer,
+         )
+2025-07-25 07:59:21,031 - INFO - Eval script for django__django-16229 written to logs/run_evaluation/batch_12/gold/django__django-16229/eval.sh; copying to container...
+2025-07-25 07:59:31,660 - INFO - Test runtime: 10.57 seconds
+2025-07-25 07:59:31,661 - INFO - Test output for django__django-16229 written to logs/run_evaluation/batch_12/gold/django__django-16229/test_output.txt
+2025-07-25 07:59:31,746 - INFO - Git diff after:
+diff --git a/django/forms/boundfield.py b/django/forms/boundfield.py
+index 9f2ae59ab4..6764276148 100644
+--- a/django/forms/boundfield.py
++++ b/django/forms/boundfield.py
+@@ -96,9 +96,17 @@ class BoundField:
+             attrs.setdefault(
+                 "id", self.html_initial_id if only_initial else self.auto_id
+             )
++        if only_initial and self.html_initial_name in self.form.data:
++            # Propagate the hidden initial value.
++            value = self.form._widget_data_value(
++                self.field.hidden_widget(),
++                self.html_initial_name,
++            )
++        else:
++            value = self.value()
+         return widget.render(
+             name=self.html_initial_name if only_initial else self.html_name,
+-            value=self.value(),
++            value=value,
+             attrs=attrs,
+             renderer=self.form.renderer,
+         )
+2025-07-25 07:59:31,746 - INFO - Grading answer for django__django-16229...
+2025-07-25 07:59:31,747 - INFO - report: {'django__django-16229': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_callable_default_hidden_widget_value_not_overridden (forms_tests.tests.tests.ModelFormCallableModelDefault)'], 'failure': []}, 'PASS_TO_PASS': {'success': ['Test for issue 10405', "If a model's ManyToManyField has blank=True and is saved with no data,", 'test_m2m_field_exclusion (forms_tests.tests.tests.ManyToManyExclusionTestCase)', 'test_empty_field_char (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_empty_field_char_none (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_empty_field_integer (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_get_display_value_on_none (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_html_rendering_of_prepopulated_models (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_save_empty_label_forms (forms_tests.tests.tests.Jinja2EmptyLabelTestCase)', 'test_boundary_conditions (forms_tests.tests.tests.FormsModelTestCase)', 'test_formfield_initial (forms_tests.tests.tests.FormsModelTestCase)', 'test_unicode_filename (forms_tests.tests.tests.FormsModelTestCase)', 'test_empty_field_char (forms_tests.tests.tests.EmptyLabelTestCase)', 'test_empty_field_char_none (forms_tests.tests.tests.EmptyLabelTestCase)', 'test_empty_field_integer (forms_tests.tests.tests.EmptyLabelTestCase)', 'test_get_display_value_on_none (forms_tests.tests.tests.EmptyLabelTestCase)', 'test_html_rendering_of_prepopulated_models (forms_tests.tests.tests.EmptyLabelTestCase)', 'test_save_empty_label_forms (forms_tests.tests.tests.EmptyLabelTestCase)', 'The initial value for a callable default returning a queryset is the', 'Initial instances for model fields may also be instances (refs #7287)', "If a model's ForeignKey has blank=False and a default, no empty option"], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for django__django-16229: resolved: True
+2025-07-25 07:59:31,747 - INFO - Attempting to stop container sweb.eval.django__django-16229.batch_12...
+2025-07-25 07:59:49,067 - INFO - Attempting to remove container sweb.eval.django__django-16229.batch_12...
+2025-07-25 07:59:49,104 - INFO - Container sweb.eval.django__django-16229.batch_12 removed.
+2025-07-25 07:59:49,104 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.django_1776_django-16229:latest...
+2025-07-25 07:59:49,412 - INFO - Image swebench/sweb.eval.x86_64.django_1776_django-16229:latest removed.

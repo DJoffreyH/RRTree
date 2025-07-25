@@ -1,0 +1,73 @@
+2025-07-25 17:38:22,247 - INFO - Creating container for sympy__sympy-15678...
+2025-07-25 17:38:22,643 - INFO - Container for sympy__sympy-15678 created: eca7afb56dc3c7a539a6d795201fb38b77beb42a6b5c30573029bd2240ebe9a0
+2025-07-25 17:38:22,984 - INFO - Container for sympy__sympy-15678 started: eca7afb56dc3c7a539a6d795201fb38b77beb42a6b5c30573029bd2240ebe9a0
+2025-07-25 17:38:22,984 - INFO - Intermediate patch for sympy__sympy-15678 written to logs/run_evaluation/batch_26/gold/sympy__sympy-15678/patch.diff, now applying to container...
+2025-07-25 17:38:23,226 - INFO - >>>>> Applied Patch:
+Checking patch sympy/geometry/util.py...
+Applied patch sympy/geometry/util.py cleanly.
+
+2025-07-25 17:38:24,101 - INFO - Git diff before:
+diff --git a/sympy/geometry/util.py b/sympy/geometry/util.py
+index d32adc3066..a239b982ac 100644
+--- a/sympy/geometry/util.py
++++ b/sympy/geometry/util.py
+@@ -570,12 +570,19 @@ def idiff(eq, y, x, n=1):
+         y = y[0]
+     elif isinstance(y, Symbol):
+         dep = {y}
++    elif isinstance(y, Function):
++        pass
+     else:
+-        raise ValueError("expecting x-dependent symbol(s) but got: %s" % y)
++        raise ValueError("expecting x-dependent symbol(s) or function(s) but got: %s" % y)
+ 
+     f = dict([(s, Function(
+         s.name)(x)) for s in eq.free_symbols if s != x and s in dep])
+-    dydx = Function(y.name)(x).diff(x)
++
++    if isinstance(y, Symbol):
++        dydx = Function(y.name)(x).diff(x)
++    else:
++        dydx = y.diff(x)
++
+     eq = eq.subs(f)
+     derivs = {}
+     for i in range(n):
+2025-07-25 17:38:24,101 - INFO - Eval script for sympy__sympy-15678 written to logs/run_evaluation/batch_26/gold/sympy__sympy-15678/eval.sh; copying to container...
+2025-07-25 17:39:04,573 - INFO - Test runtime: 40.37 seconds
+2025-07-25 17:39:04,573 - INFO - Test output for sympy__sympy-15678 written to logs/run_evaluation/batch_26/gold/sympy__sympy-15678/test_output.txt
+2025-07-25 17:39:04,724 - INFO - Git diff after:
+diff --git a/sympy/geometry/util.py b/sympy/geometry/util.py
+index d32adc3066..a239b982ac 100644
+--- a/sympy/geometry/util.py
++++ b/sympy/geometry/util.py
+@@ -570,12 +570,19 @@ def idiff(eq, y, x, n=1):
+         y = y[0]
+     elif isinstance(y, Symbol):
+         dep = {y}
++    elif isinstance(y, Function):
++        pass
+     else:
+-        raise ValueError("expecting x-dependent symbol(s) but got: %s" % y)
++        raise ValueError("expecting x-dependent symbol(s) or function(s) but got: %s" % y)
+ 
+     f = dict([(s, Function(
+         s.name)(x)) for s in eq.free_symbols if s != x and s in dep])
+-    dydx = Function(y.name)(x).diff(x)
++
++    if isinstance(y, Symbol):
++        dydx = Function(y.name)(x).diff(x)
++    else:
++        dydx = y.diff(x)
++
+     eq = eq.subs(f)
+     derivs = {}
+     for i in range(n):
+2025-07-25 17:39:04,724 - INFO - Grading answer for sympy__sympy-15678...
+2025-07-25 17:39:04,725 - INFO - report: {'sympy__sympy-15678': {'patch_is_None': False, 'patch_exists': True, 'patch_successfully_applied': True, 'resolved': True, 'tests_status': {'FAIL_TO_PASS': {'success': ['test_idiff'], 'failure': []}, 'PASS_TO_PASS': {'success': ['test_intersection', 'test_convex_hull', 'test_centroid'], 'failure': []}, 'FAIL_TO_FAIL': {'success': [], 'failure': []}, 'PASS_TO_FAIL': {'success': [], 'failure': []}}}}
+Result for sympy__sympy-15678: resolved: True
+2025-07-25 17:39:04,725 - INFO - Attempting to stop container sweb.eval.sympy__sympy-15678.batch_26...
+2025-07-25 17:39:20,158 - INFO - Attempting to remove container sweb.eval.sympy__sympy-15678.batch_26...
+2025-07-25 17:39:20,181 - INFO - Container sweb.eval.sympy__sympy-15678.batch_26 removed.
+2025-07-25 17:39:20,181 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.sympy_1776_sympy-15678:latest...
+2025-07-25 17:39:20,332 - INFO - Image swebench/sweb.eval.x86_64.sympy_1776_sympy-15678:latest removed.

@@ -1,0 +1,75 @@
+2025-07-25 06:32:48,385 - INFO - Creating container for astropy__astropy-14182...
+2025-07-25 06:32:48,388 - ERROR - Error creating container for astropy__astropy-14182: 409 Client Error for http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64: Conflict ("Conflict. The container name "/sweb.eval.astropy__astropy-14182.test_lite_eval" is already in use by container "7dc0033ac8c7af9c0792d748083a72d902119c5a91599f9bc7d05d0ef7c2fdb1". You have to remove (or rename) that container to be able to reuse that name.")
+2025-07-25 06:32:48,411 - INFO - Traceback (most recent call last):
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 275, in _raise_for_status
+    response.raise_for_status()
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/joffrey/projects/ai/InfoCash/SWE-bench/swebench/harness/docker_build.py", line 479, in build_container
+    container = client.containers.create(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/models/containers.py", line 935, in create
+    resp = self.client.api.create_container(**create_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/container.py", line 440, in create_container
+    return self.create_container_from_config(config, name, platform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/container.py", line 457, in create_container_from_config
+    return self._result(res, True)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 281, in _result
+    self._raise_for_status(response)
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 277, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 409 Client Error for http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64: Conflict ("Conflict. The container name "/sweb.eval.astropy__astropy-14182.test_lite_eval" is already in use by container "7dc0033ac8c7af9c0792d748083a72d902119c5a91599f9bc7d05d0ef7c2fdb1". You have to remove (or rename) that container to be able to reuse that name.")
+
+2025-07-25 06:32:48,419 - INFO - Traceback (most recent call last):
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 275, in _raise_for_status
+    response.raise_for_status()
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/joffrey/projects/ai/InfoCash/SWE-bench/swebench/harness/docker_build.py", line 479, in build_container
+    container = client.containers.create(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/models/containers.py", line 935, in create
+    resp = self.client.api.create_container(**create_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/container.py", line 440, in create_container
+    return self.create_container_from_config(config, name, platform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/container.py", line 457, in create_container_from_config
+    return self._result(res, True)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 281, in _result
+    self._raise_for_status(response)
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/api/client.py", line 277, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 409 Client Error for http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64: Conflict ("Conflict. The container name "/sweb.eval.astropy__astropy-14182.test_lite_eval" is already in use by container "7dc0033ac8c7af9c0792d748083a72d902119c5a91599f9bc7d05d0ef7c2fdb1". You have to remove (or rename) that container to be able to reuse that name.")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/joffrey/projects/ai/InfoCash/SWE-bench/swebench/harness/run_evaluation.py", line 141, in run_instance
+    container = build_container(
+                ^^^^^^^^^^^^^^^^
+  File "/home/joffrey/projects/ai/InfoCash/SWE-bench/swebench/harness/docker_build.py", line 495, in build_container
+    raise BuildImageError(test_spec.instance_id, str(e), logger) from e
+swebench.harness.docker_build.BuildImageError: Error building image astropy__astropy-14182: 409 Client Error for http+docker://localhost/v1.48/containers/create?name=sweb.eval.astropy__astropy-14182.test_lite_eval&platform=linux%2Fx86_64: Conflict ("Conflict. The container name "/sweb.eval.astropy__astropy-14182.test_lite_eval" is already in use by container "7dc0033ac8c7af9c0792d748083a72d902119c5a91599f9bc7d05d0ef7c2fdb1". You have to remove (or rename) that container to be able to reuse that name.")
+Check (logs/run_evaluation/test_lite_eval/gold/astropy__astropy-14182/run_instance.log) for more information.
+

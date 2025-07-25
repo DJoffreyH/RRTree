@@ -1,0 +1,22 @@
+2025-07-25 08:16:41,202 - INFO - Creating container for matplotlib__matplotlib-22711...
+2025-07-25 08:16:42,336 - INFO - Container for matplotlib__matplotlib-22711 created: 907058f285e9cae4a361f3bfa8bf2b79bade1dfd593f3afcb2f32543978adadd
+2025-07-25 08:16:42,887 - INFO - Container for matplotlib__matplotlib-22711 started: 907058f285e9cae4a361f3bfa8bf2b79bade1dfd593f3afcb2f32543978adadd
+2025-07-25 08:16:43,209 - ERROR - Error in evaluating model for matplotlib__matplotlib-22711: [Errno 28] No space left on device
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/joffrey/projects/ai/InfoCash/SWE-bench/swebench/harness/run_evaluation.py", line 149, in run_instance
+    patch_file.write_text(pred[KEY_PREDICTION] or "")
+  File "/home/joffrey/miniconda3/envs/gi/lib/python3.12/pathlib.py", line 1047, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 28] No space left on device
+
+Check (logs/run_evaluation/batch_13/gold/matplotlib__matplotlib-22711/run_instance.log) for more information.
+2025-07-25 08:16:43,215 - INFO - Attempting to stop container sweb.eval.matplotlib__matplotlib-22711.batch_13...
+2025-07-25 08:16:59,396 - INFO - Attempting to remove container sweb.eval.matplotlib__matplotlib-22711.batch_13...
+2025-07-25 08:16:59,416 - INFO - Container sweb.eval.matplotlib__matplotlib-22711.batch_13 removed.
+2025-07-25 08:16:59,431 - INFO - Attempting to remove image swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-22711:latest...
+2025-07-25 08:17:00,838 - INFO - Image swebench/sweb.eval.x86_64.matplotlib_1776_matplotlib-22711:latest removed.
