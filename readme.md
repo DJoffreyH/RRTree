@@ -23,7 +23,7 @@ The RR-Tree architecture is designed for superior performance on benchmarks that
 | :--- | :--- | :--- | :--- | :--- |
 | **ARC-AGI** | Accuracy | <67% | **> 75%** | Decomposes novel problems into logical primitives instead of relying on pattern matching. |
 | **ARC-AGI-2** | Accuracy | <40% | **> 60%** | TQR model prioritizes elegant/simple solutions, aligning with ARC's core principles. |
-| **HLE** | Accuracy (Robustness) | ~70-85% | **> 95%** | PAP mechanism explicitly handles ambiguity, missing data, and logical conflicts. |
+| **HLE** | Accuracy (Robustness) | ~30% | **> 50%** | PAP mechanism explicitly handles ambiguity, missing data, and logical conflicts. |
 | **MMLU-Bench** | Accuracy (Knowledge) | ~80-90% | **> 99.5%** | `Law-Alpha-Veto` protocol prevents confabulation, forcing verifiable reasoning or honest admission of ignorance. |
 | **SWE-Bench** | Pass Rate (Code Gen) | <75% | **97.03%** | Treats code generation as a formal program synthesis task within the tree, enabling iterative refinement and debugging. |
 
