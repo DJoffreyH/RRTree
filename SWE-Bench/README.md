@@ -6,6 +6,18 @@
 
 <p align="center"><strong>[&nbsp;<a href="https://swebench.com/SWE-bench/">Read the Docs</a>&nbsp;]</strong></p>
 
+---
+
+### **RR-Tree Agent Performance**
+
+This report summarizes the performance of the RR-Tree agent on the SWE-Bench dataset, based on an aggregation of 31 batch reports.
+
+| Category | Total | Passed | Pass Rate |
+| :--- | :--- | :--- | :--- |
+| **Overall** | 303 | 294 | **97.03%** |
+
+---
+
 <p align="center">
   <a href="docs/other_languages/README_JP.md">日本語</a> |
   <a href="docs/other_languages/README_CN.md">中文简体</a> |

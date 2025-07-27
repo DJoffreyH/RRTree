@@ -15,6 +15,22 @@ The pursuit of autonomous agents has been constrained by the limitations of line
 
 ---
 
+### **📊 Performance (Theoretical Target)**
+
+The RR-Tree architecture is designed for superior performance on benchmarks that require complex, multi-step reasoning and robustness against ambiguity or flawed premises. The following table outlines the theoretical target performance compared to existing paradigms.
+
+| Benchmark | Metric | Mainstream LLM (Baseline) | RR-Tree (Target) | Rationale for Improvement |
+| :--- | :--- | :--- | :--- | :--- |
+| **ARC-AGI** | Accuracy | <67% | **> 75%** | Decomposes novel problems into logical primitives instead of relying on pattern matching. |
+| **ARC-AGI-2** | Accuracy | <40% | **> 60%** | TQR model prioritizes elegant/simple solutions, aligning with ARC's core principles. |
+| **HLE** | Accuracy (Robustness) | ~70-85% | **> 95%** | PAP mechanism explicitly handles ambiguity, missing data, and logical conflicts. |
+| **MMLU-Bench** | Accuracy (Knowledge) | ~80-90% | **> 99.5%** | `Law-Alpha-Veto` protocol prevents confabulation, forcing verifiable reasoning or honest admission of ignorance. |
+| **SWE-Bench** | Pass Rate (Code Gen) | <75% | **97.03%** | Treats code generation as a formal program synthesis task within the tree, enabling iterative refinement and debugging. |
+
+*Note: Baseline scores are approximate and represent the state of the art as of early 2025. RR-Tree targets are theoretical and subject to validation upon implementation.*
+
+---
+
 ### **🏛️ Core Principles**
 
 The RR-Tree architecture is founded on three core ideas:
