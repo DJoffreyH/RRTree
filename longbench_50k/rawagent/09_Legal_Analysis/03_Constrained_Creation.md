@@ -1,7 +1,0 @@
-### Confidentiality.
-
-**1.1 Definition of Confidential Information.** For the purposes of this Agreement, "Confidential Information" shall mean any and all non-public information disclosed by the Disclosing Party (the "Company") to the Receiving Party (the "Contractor"), whether orally, in writing, or in any other form, that relates to the Company's business, products, technology, finances, or customers. This includes, but is not limited to, business plans, source code, algorithms, financial data, customer lists, and any other information designated as confidential.
-
-**1.2 Obligations of the Contractor.** The Contractor shall hold all Confidential Information in strict confidence and shall not, without the prior written consent of the Company, (a) disclose any Confidential Information to any third party; (b) use any Confidential Information for any purpose other than to perform its obligations under this Agreement; and (c) fail to take reasonable security measures, consistent with industry standards, to protect the Confidential Information from unauthorized disclosure or use.
-
-**1.3 Exclusions.** The obligations set forth in Section 1.2 shall not apply to any information that the Contractor can demonstrate: (a) was already lawfully in its possession prior to its disclosure by the Company; (b) has become part of the public domain through no fault of the Contractor; or (c) was lawfully obtained by the Contractor from a third party who had the right to disclose such information without restriction.
